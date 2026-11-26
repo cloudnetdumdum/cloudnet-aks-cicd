@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: cloudnet-web
+  namespace: production
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: cloudnet-web
+
+  template:
+    metadata:
+      labels:
+        app: cloudnet-web
+
+    spec:
+      containers:
+      - name: cloudnet-web
+        image: nginx:alpine
+
+        ports:
+        - containerPort: 80
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
+
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
